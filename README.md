@@ -1,4 +1,4 @@
-# tita_description
+# Bipedal-Leg-Wheeled-Robot
 ---
 **该项目的研究方向是基于双轮腿机器人构型的控制。**
 **多种控制！！多种平台！！多种算法！！**
