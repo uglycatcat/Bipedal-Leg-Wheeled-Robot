@@ -4,13 +4,13 @@
   该文件使用了MuJoCo的XML格式，包含了资产、世界体、关节和电机等元素。
   -->
 <mujoco>
-  <compiler angle="radian" meshdir="../meshes" autolimits="true"/>
+  <compiler angle="radian" meshdir="../meshes"/>
 
   <option timestep="0.001" gravity="0 0 -9.81"/>
   <!--添加一些默认设置-->
   <default>
-      <joint type="hinge" frictionloss="0.1" damping='2' />
-      <position ctrllimited="true" ctrlrange="-3.14 3.14" forcelimited="true" forcerange="-500 500" kp="100" />
+    <joint type="hinge" frictionloss="0.1" damping="5"/> <!-- 增加阻尼 -->
+    <position ctrllimited="true" ctrlrange="-3.14 3.14" forcelimited="true" forcerange="-500 500" kp="20"/> <!-- 调整增益 -->
   </default>
 
   <asset>
@@ -51,24 +51,23 @@
       <geom type="mesh" mesh="base_link_mesh" material="black"/>
 
       <!-- 左腿 -->
-      <body name="left_leg_1" pos="0 0.0895 0" euler="1.5708 0 1.5708">
-        <joint name="joint_left_leg_1" type="hinge" axis="0 0 1" limited="true" range="-3.14 3.14"/>
+      <body name="left_leg_1" pos="0 0.0895 0" euler="0 1.5708 1.5708">
+        <joint name="joint_left_leg_1" axis="0 0 1" range="-3.14 3.14"/>
         <inertial pos="0.0016025 0.000050253 0.000638" mass="2.064" diaginertia="0.0043044 0.0029982 0.0022703"/>
         <geom type="mesh" mesh="left_leg_1_mesh" material="black"/>
 
-        <body name="left_leg_2" pos="0.1426 0 0" euler="-1.5708 0 -1.5708">
-          <joint name="joint_left_leg_2" type="hinge" axis="0 0 1" limited="true" range="-3.14 3.14"/>
+        <body name="left_leg_2" pos="0.1426 0 0" euler="0 1.5708 1.5708">
+          <joint name="joint_left_leg_2" axis="0 0 1" range="-3.14 3.14"/>
           <inertial pos="0.021763 0.0019069 -0.027868" mass="3.0984" diaginertia="0.0029784 0.0064836 0.0088353"/>
           <geom type="mesh" mesh="left_leg_2_mesh" material="black"/>
 
           <body name="left_leg_3" pos="0.2 0 0">
-            <joint name="joint_left_leg_3" type="hinge" axis="0 0 1" limited="true" range="-3.14 3.14"/>
+            <joint name="joint_left_leg_3" axis="0 0 1" range="-3.14 3.14"/>
             <inertial pos="0.095348 0.011698 0.001838" mass="0.57244" diaginertia="0.000306 0.003201 0.003421"/>
             <geom type="mesh" mesh="left_leg_3_mesh" material="black"/>
             
-
             <body name="left_leg_4" pos="0.2 0 0.0514">
-              <joint name="joint_left_leg_4" type="hinge" axis="0 0 1" limited="false"/>
+              <joint name="joint_left_leg_4" axis="0 0 1" limited="false"/>
               <inertial pos="0.000002267 0.0000016471 -0.00095616" mass="1.5094" diaginertia="0.003547 0.003505 0.006905"/>
               <geom type="mesh" mesh="left_leg_4_mesh" material="black"/>
               
@@ -78,24 +77,23 @@
       </body>
 
       <!-- 右腿 -->
-      <body name="right_leg_1" pos="0 -0.0895 0" euler="1.5708 0 1.5708">
-        <joint name="joint_right_leg_1" type="hinge" axis="0 0 1" limited="true" range="-3.14 3.14"/>
+      <body name="right_leg_1" pos="0 -0.0895 0" euler="0 1.5708 1.5708">
+        <joint name="joint_right_leg_1" axis="0 0 1" range="-3.14 3.14"/>
         <inertial pos="-0.0016025 0.000050253 0.000638" mass="2.064" diaginertia="0.0043044 0.0029982 0.0022703"/>
         <geom type="mesh" mesh="right_leg_1_mesh" material="black"/>
 
-        <body name="right_leg_2" pos="-0.1426 0 0" euler="-1.5708 0 -1.5708">
-          <joint name="joint_right_leg_2" type="hinge" axis="0 0 1" limited="true" range="-3.14 3.14"/>
+        <body name="right_leg_2" pos="-0.1426 0 0" euler="0 1.5708 1.5708">
+          <joint name="joint_right_leg_2" axis="0 0 1" range="-3.14 3.14"/>
           <inertial pos="0.021763 0.0019065 0.027873" mass="3.0987" diaginertia="0.0029784 0.0064836 0.0088353"/>
           <geom type="mesh" mesh="right_leg_2_mesh" material="black"/>
 
           <body name="right_leg_3" pos="0.2 0 0">
-            <joint name="joint_right_leg_3" type="hinge" axis="0 0 1" limited="true" range="-3.14 3.14"/>
+            <joint name="joint_right_leg_3" axis="0 0 1" range="-3.14 3.14"/>
             <inertial pos="0.095348 0.011698 -0.001838" mass="0.57244" diaginertia="0.000306 0.003201 0.003421"/>
             <geom type="mesh" mesh="right_leg_3_mesh" material="black"/>
             
-
             <body name="right_leg_4" pos="0.2 0 -0.0514">
-              <joint name="joint_right_leg_4" type="hinge" axis="0 0 1" limited="false"/>
+              <joint name="joint_right_leg_4" axis="0 0 1" limited="false"/>
               <inertial pos="0.0000023798 0.0000015854 0.00095595" mass="1.5094" diaginertia="0.003547 0.003505 0.006905"/>
               <geom type="mesh" mesh="right_leg_4_mesh" material="black"/>
               
