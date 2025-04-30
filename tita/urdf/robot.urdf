@@ -35,7 +35,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/base_link.STL"/>
+        <mesh filename="../meshes/base_link.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -55,7 +55,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/left_leg_1.STL"/>
+        <mesh filename="../meshes/left_leg_1.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -76,7 +76,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/left_leg_2.STL"/>
+        <mesh filename="../meshes/left_leg_2.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -97,7 +97,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/left_leg_3.STL"/>
+        <mesh filename="../meshes/left_leg_3.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -124,7 +124,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/left_leg_4.STL"/>
+        <mesh filename="../meshes/left_leg_4.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -151,7 +151,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/right_leg_1.STL"/>
+        <mesh filename="../meshes/right_leg_1.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -172,7 +172,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/right_leg_2.STL"/>
+        <mesh filename="../meshes/right_leg_2.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -193,7 +193,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/right_leg_3.STL"/>
+        <mesh filename="../meshes/right_leg_3.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
@@ -220,7 +220,7 @@
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="package://tita_description/tita/meshes/right_leg_4.STL"/>
+        <mesh filename="../meshes/right_leg_4.STL"/>
       </geometry>
       <material name="black"/>
     </visual>
