@@ -2,6 +2,8 @@ import mujoco as mj
 import mujoco.viewer
 import time
 import glfw
+from ControlGUI import RobotControlGUI
+import MotionControl
 
 class RobotController:
     
@@ -19,7 +21,8 @@ class RobotController:
             self.data,
             show_left_ui=False,
         )
-        
+        # 开启GUI子线程
+        RobotControlGUI.start()
         # 记录上次渲染时间
         self.last_render_time = time.time()
         
@@ -42,7 +45,8 @@ class RobotController:
                 if elapsed > 1.0/60.0:  # 约60Hz渲染频率
                     self.viewer.sync()
                     self.last_render_time = now
-                
+                # 传递数据
+                RobotControlGUI.receive_data(self.data.actuator_length[:8])
                 # 计算并补偿仿真时间与实际时间的差异
                 time_until_next_step = step_time - (time.time() - loop_start)
                 if time_until_next_step > 0:
@@ -51,6 +55,9 @@ class RobotController:
         except KeyboardInterrupt:
             print("Simulation interrupted by user")
         finally:
+            # 关闭GUI线程
+            RobotControlGUI.stop()
+            # 关闭窗口
             self.viewer.close()
 
 if __name__ == "__main__":
