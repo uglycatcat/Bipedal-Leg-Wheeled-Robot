@@ -1,7 +1,7 @@
 import mujoco as mj
 import mujoco.viewer
 import time
-import numpy as np
+import glfw
 
 class RobotController:
     
@@ -14,10 +14,10 @@ class RobotController:
         mj.mj_forward(self.model, self.data)
         
         # 初始化观察器，使用与simulate命令类似的配置
-        self.viewer = mj.viewer.launch_passive(
-            self.model, 
+        self.viewer = mujoco.viewer.launch_passive(
+            self.model,
             self.data,
-            show_left_ui=False,  # 隐藏左侧UI面板
+            show_left_ui=False,
         )
         
         # 记录上次渲染时间
