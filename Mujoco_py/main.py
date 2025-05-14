@@ -26,6 +26,18 @@ class RobotController:
         # 记录上次渲染时间
         self.last_render_time = time.time()
         
+    def transmit_sim_data(self):
+        # 提取关节的 qpos 和 qvel（跳过 free joint 部分）
+        qpos_data = self.data.qpos[7:15]  # 8 个关节的位置
+        qvel_data = self.data.qvel[6:14]  # 8 个关节的速度
+
+        # 将角速度值更新到对应位置（原来是 actuator_data[3], actuator_data[7]）
+        qpos_data[3] = qvel_data[3]
+        qpos_data[7] = qvel_data[7]
+
+        # 传递更新后的数据
+        RobotControlGUI.receive_data(qpos_data)
+    
     def run(self):
         """主仿真循环"""
         try:
@@ -45,13 +57,9 @@ class RobotController:
                 if elapsed > 1.0/60.0:  # 约60Hz渲染频率
                     self.viewer.sync()
                     self.last_render_time = now
-                    
-                # 直接获取并更新actuator_data，传递速度值
-                actuator_data = self.data.actuator_length[:8]
-                actuator_data[3], actuator_data[7] = self.data.qvel[4], self.data.qvel[7]
-
-                # 传递更新后的数据
-                RobotControlGUI.receive_data(actuator_data)
+                
+                # 向GUI线程传递数据
+                self.transmit_sim_data()
                 
                 # 计算并补偿仿真时间与实际时间的差异
                 time_until_next_step = step_time - (time.time() - loop_start)

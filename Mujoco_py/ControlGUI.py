@@ -7,8 +7,8 @@ class ControllerGUI:
     
     def __init__(self):
         """实例初始化"""
-        self.width = 800
-        self.height = 600
+        self.width = 600
+        self.height = 800
         self.control_motor_dict = {
             "Left_Hip_Roll": 0,
             "Left_Hip_Pitch": 0,

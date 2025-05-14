@@ -109,13 +109,13 @@
     <position name="Left_Hip_Roll" joint="joint_left_leg_1" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
     <position name="Left_Hip_Pitch" joint="joint_left_leg_2" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
     <position name="Left_Knee_Pitch" joint="joint_left_leg_3" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <velocity name="Left_Ankle_Wheel" joint="joint_left_leg_4" kv="5" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <velocity name="Left_Ankle_Wheel" joint="joint_left_leg_4" kv="10" ctrllimited="true" ctrlrange="-6.28 6.28"/>
 
     <!-- 右腿 -->
     <position name="Right_Hip_Roll" joint="joint_right_leg_1" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
     <position name="Right_Hip_Pitch" joint="joint_right_leg_2" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
     <position name="Right_Knee_Pitch" joint="joint_right_leg_3" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <velocity name="Right_Ankle_Wheel" joint="joint_right_leg_4" kv="5" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <velocity name="Right_Ankle_Wheel" joint="joint_right_leg_4" kv="10" ctrllimited="true" ctrlrange="-6.28 6.28"/>
   </actuator>
 
   <!--keyframe关键字表示关键帧，该home关键帧表示初始状态，qpos表示所有关节的角度。ctrl表示可控关节的角度 -->
