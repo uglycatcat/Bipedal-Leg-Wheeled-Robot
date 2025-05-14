@@ -6,14 +6,11 @@
   -->
 <mujoco>
   <compiler angle="radian" meshdir="../meshes"/>
-
   <option timestep="0.001" gravity="0 0 -9.81"/>
   <!--添加一些默认设置-->
   <default>
-    <joint type="hinge" frictionloss="0.1" damping="2"/> <!-- 增加阻尼 -->
-    <position ctrllimited="true" ctrlrange="-3.14 3.14" forcelimited="true" forcerange="-500 500" kp="200"/> <!-- 调整增益 -->
+    <joint type="hinge" frictionloss="0.1" damping="2"/> <!-- 适度阻尼以抑制震荡 -->
   </default>
-
   <asset>
     <!-- ========== 材质定义 ========== -->
     <material name="black" rgba="0.196 0.196 0.196 1"/>
@@ -108,19 +105,22 @@
   </worldbody>
 
   <actuator>
-    <!-- 定义所有关节的电机 -->
-    <motor name="Left_Hip_Roll" joint="joint_left_leg_1"/>
-    <motor name="Left_Hip_Pitch" joint="joint_left_leg_2"/>
-    <motor name="Left_Knee_Pitch" joint="joint_left_leg_3"/>
-    <motor name="Left_Ankle_Wheel" joint="joint_left_leg_4"/>
-    <motor name="Right_Hip_Roll" joint="joint_right_leg_1"/>
-    <motor name="Right_Hip_Pitch" joint="joint_right_leg_2"/>
-    <motor name="Right_Knee_Pitch" joint="joint_right_leg_3"/>
-    <motor name="Right_Ankle_Wheel" joint="joint_right_leg_4"/>
-    <!-- 其他电机定义省略... -->
+    <!-- 左腿 -->
+    <position name="Left_Hip_Roll" joint="joint_left_leg_1" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Left_Hip_Pitch" joint="joint_left_leg_2" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Left_Knee_Pitch" joint="joint_left_leg_3" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <velocity name="Left_Ankle_Wheel" joint="joint_left_leg_4" kv="5" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+
+    <!-- 右腿 -->
+    <position name="Right_Hip_Roll" joint="joint_right_leg_1" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Right_Hip_Pitch" joint="joint_right_leg_2" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Right_Knee_Pitch" joint="joint_right_leg_3" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <velocity name="Right_Ankle_Wheel" joint="joint_right_leg_4" kv="5" ctrllimited="true" ctrlrange="-3.14 3.14"/>
   </actuator>
+
   <!--keyframe关键字表示关键帧，该home关键帧表示初始状态，qpos表示所有关节的角度。ctrl表示可控关节的角度 -->
   <keyframe>
     <key name="home" qpos="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0" ctrl="0 0 0 0 0 0 0 0"/>
   </keyframe>
+
 </mujoco>

@@ -45,8 +45,14 @@ class RobotController:
                 if elapsed > 1.0/60.0:  # 约60Hz渲染频率
                     self.viewer.sync()
                     self.last_render_time = now
-                # 传递数据
-                RobotControlGUI.receive_data(self.data.actuator_length[:8])
+                    
+                # 直接获取并更新actuator_data，传递速度值
+                actuator_data = self.data.actuator_length[:8]
+                actuator_data[3], actuator_data[7] = self.data.qvel[4], self.data.qvel[7]
+
+                # 传递更新后的数据
+                RobotControlGUI.receive_data(actuator_data)
+                
                 # 计算并补偿仿真时间与实际时间的差异
                 time_until_next_step = step_time - (time.time() - loop_start)
                 if time_until_next_step > 0:

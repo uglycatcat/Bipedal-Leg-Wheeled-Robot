@@ -45,7 +45,7 @@ class ControllerGUI:
         # 绘制每个关节的数据
         y_pos = 80
         for joint, value in self.control_motor_dict.items():
-            text = self.font.render(f"{joint}: {value:.2f}", True, (0, 0, 0))
+            text = self.font.render(f"{joint}: {value:.4f}", True, (0, 0, 0))
             self.screen.blit(text, (50, y_pos))
             y_pos += 40
             
