@@ -2,6 +2,8 @@ import mujoco as mj
 import mujoco.viewer
 import time
 import glfw
+import numpy as np
+from scipy.spatial.transform import Rotation as R
 from ControlGUI import RobotControlGUI
 import MotionControl
 
@@ -23,6 +25,8 @@ class RobotController:
         )
         # 开启GUI子线程
         RobotControlGUI.start()
+        # 初始化base_link的欧拉角
+        self.base_link_euler=[]
         # 记录上次渲染时间
         self.last_render_time = time.time()
         
@@ -34,11 +38,23 @@ class RobotController:
         # 将角速度值更新到对应位置
         qpos_data[3] = qvel_data[3]
         qpos_data[7] = qvel_data[7]
-
+        
+        # 合并数据
+        processed_data = np.concatenate([qpos_data, self.base_link_euler])
+        
         # 传递更新后的数据
-        RobotControlGUI.receive_data(qpos_data)
+        RobotControlGUI.receive_data(processed_data)
         
     def set_all_joint_control(self):
+        quat = self.data.qpos[3:7]  # base_link 的四元数
+        r = R.from_quat([quat[1], quat[2], quat[3], quat[0]])  # 注意 scipy 是 [x, y, z, w]
+        self.base_link_euler = r.as_euler('xyz', degrees=False)
+        kp=1
+        ki=0.1
+        kd=0.1
+        last_error=self.base_link_euler[1]
+        
+        error=last_error
         self.data.ctrl[0]=0
         self.data.ctrl[1]=0
         self.data.ctrl[2]=0

@@ -46,6 +46,7 @@
   <worldbody>
     <!-- 主基座 -->
     <body name="base_link" pos="0 0 0.5">
+      <!-- 绑定base_link的imu位置 -->
       <site name="imu_site" type="box" pos="0 0 0" size="0.02 0.01 0.01" rgba="1 0 0 1"/>
       <joint name="base_joint" type="free"/>
       <inertial pos="0.020452 0.0000035457 0.01871" mass="13.2" diaginertia="0.061855 0.036934 0.071232"/>

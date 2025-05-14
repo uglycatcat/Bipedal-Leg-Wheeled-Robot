@@ -18,6 +18,9 @@ class ControllerGUI:
             "Right_Hip_Pitch": 0,
             "Right_Knee_Pitch": 0,
             "Right_Ankle_Wheel": 0,
+            "base_link_euler-x": 0,
+            "base_link_euler-y": 0,
+            "base_link_euler-z": 0,
         }
         self.running = threading.Event()
         self.thread = None
@@ -94,13 +97,13 @@ class ControllerGUI:
         
     def receive_data(self, control_data):
         """获取机器人的控制数据数组"""
-        if len(control_data) != 8: 
+        if len(control_data) != 11: 
             print("传入GUI的关节数组长度不正确")
             return
             
         # 如果数据格式正常，将control_data按顺序传入字典
         keys = list(self.control_motor_dict.keys())
-        for i in range(8):
+        for i in range(11):
             self.control_motor_dict[keys[i]] = control_data[i]
             
     def __del__(self):
