@@ -31,13 +31,23 @@ class RobotController:
         qpos_data = self.data.qpos[7:15]  # 8 个关节的位置
         qvel_data = self.data.qvel[6:14]  # 8 个关节的速度
 
-        # 将角速度值更新到对应位置（原来是 actuator_data[3], actuator_data[7]）
+        # 将角速度值更新到对应位置
         qpos_data[3] = qvel_data[3]
         qpos_data[7] = qvel_data[7]
 
         # 传递更新后的数据
         RobotControlGUI.receive_data(qpos_data)
-    
+        
+    def set_all_joint_control(self):
+        self.data.ctrl[0]=0
+        self.data.ctrl[1]=0
+        self.data.ctrl[2]=0
+        self.data.ctrl[3]=3
+        self.data.ctrl[4]=0
+        self.data.ctrl[5]=0
+        self.data.ctrl[6]=0
+        self.data.ctrl[7]=3
+        
     def run(self):
         """主仿真循环"""
         try:
@@ -45,8 +55,12 @@ class RobotController:
             step_time = self.model.opt.timestep
             
             while self.viewer.is_running():
+                
                 # 记录循环开始时间
                 loop_start = time.time()
+                
+                # 设置控制数据
+                self.set_all_joint_control()
                 
                 # 步进仿真
                 mj.mj_step(self.model, self.data)
@@ -57,7 +71,7 @@ class RobotController:
                 if elapsed > 1.0/60.0:  # 约60Hz渲染频率
                     self.viewer.sync()
                     self.last_render_time = now
-                
+                    
                 # 向GUI线程传递数据
                 self.transmit_sim_data()
                 

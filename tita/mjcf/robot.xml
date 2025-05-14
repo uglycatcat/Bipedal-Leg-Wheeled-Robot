@@ -9,7 +9,7 @@
   <option timestep="0.001" gravity="0 0 -9.81"/>
   <!--添加一些默认设置-->
   <default>
-    <joint type="hinge" frictionloss="0.1" damping="2"/> <!-- 适度阻尼以抑制震荡 -->
+    <joint type="hinge" frictionloss="0.1" damping="4"/> <!-- 适度阻尼以抑制震荡 -->
   </default>
   <asset>
     <!-- ========== 材质定义 ========== -->
@@ -46,6 +46,7 @@
   <worldbody>
     <!-- 主基座 -->
     <body name="base_link" pos="0 0 0.5">
+      <site name="imu_site" type="box" pos="0 0 0" size="0.02 0.01 0.01" rgba="1 0 0 1"/>
       <joint name="base_joint" type="free"/>
       <inertial pos="0.020452 0.0000035457 0.01871" mass="13.2" diaginertia="0.061855 0.036934 0.071232"/>
       <geom type="mesh" mesh="base_link_mesh" material="yellow"/>
@@ -67,7 +68,7 @@
             <geom type="mesh" mesh="left_leg_3_mesh" material="silver"/>
             
             <body name="left_leg_4" pos="0.2 0 0.0514">
-              <joint name="joint_left_leg_4" axis="0 0 1" limited="false"/>
+              <joint name="joint_left_leg_4" axis="0 0 1" limited="false" damping="0.001"/>
               <inertial pos="0.000002267 0.0000016471 -0.00095616" mass="1.5094" diaginertia="0.003547 0.003505 0.006905"/>
               <geom type="mesh" mesh="left_leg_4_mesh" material="brown"/>
               
@@ -93,7 +94,7 @@
             <geom type="mesh" mesh="right_leg_3_mesh" material="silver"/>
             
             <body name="right_leg_4" pos="0.2 0 -0.0514">
-              <joint name="joint_right_leg_4" axis="0 0 1" limited="false"/>
+              <joint name="joint_right_leg_4" axis="0 0 1" limited="false" damping="0.001"/>
               <inertial pos="0.0000023798 0.0000015854 0.00095595" mass="1.5094" diaginertia="0.003547 0.003505 0.006905"/>
               <geom type="mesh" mesh="right_leg_4_mesh" material="brown"/>
               
@@ -103,18 +104,29 @@
       </body>
     </body>
   </worldbody>
+  
+  <!-- 传感器 -->
+  <sensor>
+    <!-- 陀螺仪 -->
+    <gyro name="gyro" site="imu_site" />
+    <!-- 加速度计 -->
+    <accelerometer name="accel" site="imu_site" />
+    <!-- 线速度仪 -->
+    <velocimeter name="velo" site="imu_site" />
+  </sensor>
 
+  <!-- 执行器 -->
   <actuator>
     <!-- 左腿 -->
-    <position name="Left_Hip_Roll" joint="joint_left_leg_1" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name="Left_Hip_Pitch" joint="joint_left_leg_2" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name="Left_Knee_Pitch" joint="joint_left_leg_3" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Left_Hip_Roll" joint="joint_left_leg_1" kp="100" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Left_Hip_Pitch" joint="joint_left_leg_2" kp="100" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Left_Knee_Pitch" joint="joint_left_leg_3" kp="100" ctrllimited="true" ctrlrange="-3.14 3.14"/>
     <velocity name="Left_Ankle_Wheel" joint="joint_left_leg_4" kv="10" ctrllimited="true" ctrlrange="-6.28 6.28"/>
 
     <!-- 右腿 -->
-    <position name="Right_Hip_Roll" joint="joint_right_leg_1" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name="Right_Hip_Pitch" joint="joint_right_leg_2" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
-    <position name="Right_Knee_Pitch" joint="joint_right_leg_3" kp="20" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Right_Hip_Roll" joint="joint_right_leg_1" kp="100" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Right_Hip_Pitch" joint="joint_right_leg_2" kp="100" ctrllimited="true" ctrlrange="-3.14 3.14"/>
+    <position name="Right_Knee_Pitch" joint="joint_right_leg_3" kp="100" ctrllimited="true" ctrlrange="-3.14 3.14"/>
     <velocity name="Right_Ankle_Wheel" joint="joint_right_leg_4" kv="10" ctrllimited="true" ctrlrange="-6.28 6.28"/>
   </actuator>
 
