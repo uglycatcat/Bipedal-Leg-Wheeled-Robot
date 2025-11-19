@@ -34,8 +34,8 @@ class RobotController:
         self.last_roll_time = time.time()
 
         # PID constants (tune these values for better performance)
-        self.kp = 150
-        self.ki = 1
+        self.kp = 120
+        self.ki = 0.7
         self.kd = 20
 
         # 记录上次渲染时间
